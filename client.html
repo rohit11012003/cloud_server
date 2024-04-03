@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Wear and Chip Morphology</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        div {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tool Wear and Chip Morphology</h1>
+
+    <div>
+        <h2>Tool Wear Calculation</h2>
+        <form id="toolWearForm">
+            <label for="cuttingForce">Entre cutting force in N:</label>
+            <input type="text" name="cuttingForce" required>
+
+            <label for="depthOfCut">Entre depth of cut in mm:</label>
+            <input type="text" name="depthOfCut" required>
+
+            <label for="cuttingSpeed">Entre cutting speed in m/min:</label>
+            <input type="text" name="cuttingSpeed" required>
+
+            <label for="feed">Entre feed rate in mm/rev :</label>
+            <input type="text" name="feed" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Chip Morphology Prediction</h2>
+        <form id="chipMorphologyForm">
+
+            <label for="image">Select Image:</label>
+            <input type="file" name="image" accept="image/*" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toolWearForm = document.querySelector('#toolWearForm');
+            const chipMorphologyForm = document.querySelector('#chipMorphologyForm');
+            toolWearForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Send the form data to the backend
+    fetch('http://127.0.0.1:8080/toolwear', {
+        method: 'POST',
+        body: new FormData(toolWearForm),
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Render the received HTML content
+        document.body.innerHTML = data;
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+chipMorphologyForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Send the form data to the backend
+    fetch('http://127.0.0.1:8080/chipmorphology', {
+        method: 'POST',
+        body: new FormData(chipMorphologyForm),
+    })
+    .then(response => response.text())
+    .then(data => {
+        // Render the received HTML content
+        document.body.innerHTML = data;
+    })
+    .catch(error => console.error('Error:', error));
+});
+        });
+    </script>
+</body>
+</html>

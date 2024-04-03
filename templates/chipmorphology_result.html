@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chip Morphology Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .chip-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .chip-info p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .chip-info p:first-child {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .chip-category {
+            text-transform: capitalize;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .parameters-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .parameter-item {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chip Morphology Result</h1>
+        <div class="chip-info">
+            <p>Predicted Class: <span class="chip-category">{{ response.predicted_class }}</span></p>
+            <p>Cutting Parameters:</p>
+            <ul class="parameters-list">
+                <li class="parameter-item"><strong>Depth of Cut:</strong> {{ response.chip_parameters.depth_of_cut }}</li>
+                <li class="parameter-item"><strong>Velocity of Cutting:</strong> {{ response.chip_parameters.velocity_of_cutting }}</li>
+                <li class="parameter-item"><strong>Feed Rate:</strong> {{ response.chip_parameters.feed_rate }}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
