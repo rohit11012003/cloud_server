@@ -96,4 +96,4 @@ def chip_morphology_handler():
     return 'Invalid file format', 400
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=8080)
+    app.run(debug=False, host='0.0.0.0', port=os.environ.get('PORT', 8080))

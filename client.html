@@ -96,7 +96,7 @@
     event.preventDefault(); // Prevent the default form submission
 
     // Send the form data to the backend
-    fetch('http://127.0.0.1:8080/toolwear', {
+    fetch('https://cloud-server.azurewebsites.net/toolwear', {
         method: 'POST',
         body: new FormData(toolWearForm),
     })
@@ -112,7 +112,7 @@ chipMorphologyForm.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent the default form submission
 
     // Send the form data to the backend
-    fetch('http://127.0.0.1:8080/chipmorphology', {
+    fetch('https://cloud-server.azurewebsites.net/chipmorphology', {
         method: 'POST',
         body: new FormData(chipMorphologyForm),
     })
