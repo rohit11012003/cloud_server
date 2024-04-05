@@ -14,6 +14,11 @@ CORS(app)  # Enable CORS for all routes
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+parameter_units = {
+    'Depth of Cut': 'mm',
+    'Velocity of Cutting': 'm/min',
+    'Feed Rate': 'mm'
+}
 
 # Load the saved model
 model_path = 'model.h5'  # Replace 'path/to/your/saved/model.h5' with the actual path of your saved model
@@ -73,22 +78,47 @@ def chip_morphology_handler():
         predicted_class_index = np.argmax(predictions)
 
         # Map predicted class index to class label and parameters
-        class_labels = ['Continious long chip', 'Continious short chip', 'Discontinious chip']
-        parameters = [
-            {'depth_of_cut': '2mm', 'velocity_of_cutting': '60.85m/mim', 'feed_rate': '0.08mm/rev'},
-            {'depth_of_cut': '2mm', 'velocity_of_cutting': '60.85m/mim', 'feed_rate': '0.16mm/rev'},
-            {'depth_of_cut': '2mm', 'velocity_of_cutting': '60.85m/mim', 'feed_rate': '0.2mm/rev'}
+        class_labels = ['Continuous long chip', 'Continuous short chip', 'Discontinuous chip']
+        parameters_1 = [
+            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.08mm'},
+            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.16mm'},
+            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.2mm'}
+        ]
+
+        parameters_2 = [
+            {'Depth of Cut': 2.0, 'Velocity of Cutting': 60.85, 'Feed Rate': 0.08},
+            {'Depth of Cut': 2.0, 'Velocity of Cutting': 60.85, 'Feed Rate': 0.16},
+            {'Depth of Cut': 2.0, 'Velocity of Cutting': 60.85, 'Feed Rate': 0.2}
         ]
         predicted_class = class_labels[predicted_class_index]
-        chip_parameters = parameters[predicted_class_index]
+        chip_parameters_1 = parameters_1[predicted_class_index]
+        chip_parameters_2 = parameters_2[predicted_class_index]
 
-        # Prepare response based on predicted class
+        # Calculate changes required to achieve desired parameters
+        desired_parameters = {'Velocity of Cutting': 280, 'Feed Rate': 0.08}
+        changes_required = {}
+        for key, desired_value in desired_parameters.items():
+            if key in chip_parameters_2:
+                current_value = chip_parameters_2[key]
+                unit = parameter_units[key]
+                if current_value != desired_value:
+                    if current_value < desired_value:
+                        change_direction = 'increase'
+                    else:
+                        change_direction = 'decrease'
+                    change_amount = abs(desired_value - current_value)
+                    changes_required[key] = f"{change_direction} by {change_amount} {unit}"
+                else:
+                    changes_required[key] = f"No change needed ({desired_value} {unit})"
+            else:
+                changes_required[key] = f"Parameter not found, set to {desired_value} {unit}"
+
+        # Prepare response based on predicted class and changes required
         response = {
             'predicted_class': predicted_class,
-            'chip_parameters': chip_parameters
+            'chip_parameters': chip_parameters_1,
+            'changes_required': changes_required
         }
-
-
 
         # Render the HTML template with results
         return render_template('chipmorphology_result.html', response=response)

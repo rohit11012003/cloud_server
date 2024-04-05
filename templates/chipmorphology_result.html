@@ -50,6 +50,12 @@
         .parameter-item {
             margin-bottom: 8px;
         }
+        .changes-required {
+            background-color: #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +70,16 @@
                 <li class="parameter-item"><strong>Feed Rate:</strong> {{ response.chip_parameters.feed_rate }}</li>
             </ul>
         </div>
+        {% if response.changes_required %}
+        <div class="changes-required">
+            <p>Changes Required to achive best surface roughness:</p>
+            <ul class="parameters-list">
+                {% for key, value in response.changes_required.items() %}
+                <li class="parameter-item"><strong>{{ key }}:</strong> {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
