@@ -65,9 +65,9 @@
             <p>Predicted Class: <span class="chip-category">{{ response.predicted_class }}</span></p>
             <p>Cutting Parameters:</p>
             <ul class="parameters-list">
-                <li class="parameter-item"><strong>Depth of Cut:</strong> {{ response.chip_parameters.Depth of Cut }}</li>
-                <li class="parameter-item"><strong>Velocity of Cutting:</strong> {{ response.chip_parameters.Velocity of Cutting }}</li>
-                <li class="parameter-item"><strong>Feed Rate:</strong> {{ response.chip_parameters.Feed Rate }}</li>
+                <li class="parameter-item"><strong>Depth of Cut:</strong> {{ response.chip_parameters['Depth of Cut'] }}</li>
+                <li class="parameter-item"><strong>Velocity of Cutting:</strong> {{ response.chip_parameters['Velocity of Cutting'] }}</li>
+                <li class="parameter-item"><strong>Feed Rate:</strong> {{ response.chip_parameters['Feed Rate'] }}</li>
             </ul>
         </div>
         {% if response.changes_required %}

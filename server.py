@@ -88,7 +88,7 @@ def chip_morphology_handler():
         parameters_2 = [
             {'Depth of Cut': 2.0, 'Velocity of Cutting': 60.85, 'Feed Rate': 0.08},
             {'Depth of Cut': 2.0, 'Velocity of Cutting': 60.85, 'Feed Rate': 0.16},
-            {'Depth of Cut': 2.0, 'Velocity of Cutting': 60.85, 'Feed Rate': 0.2}
+            {'Depth of Cut': 2.0, 'Velocity of Cutting': 60.85, 'Feed Rate': 0.20}
         ]
         predicted_class = class_labels[predicted_class_index]
         chip_parameters_1 = parameters_1[predicted_class_index]
