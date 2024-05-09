@@ -120,7 +120,7 @@ def chip_morphology_handler():
             'changes_required': changes_required
         }
 
-        # Render the HTML template with results
+       
         return render_template('chipmorphology_result.html', response=response)
 
     return 'Invalid file format', 400
