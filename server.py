@@ -57,7 +57,7 @@ def tool_wear_handler():
     tool_wear_result = ((0.3 - prediction[0][0]) / 0.3) * 100
     tool_wear_result = 100-tool_wear_result
 
-    # Render the HTML template with results
+   
     return render_template('toolwear_result.html', tool_wear_result=tool_wear_result)
 
 @app.route('/chipmorphology', methods=['POST'])
