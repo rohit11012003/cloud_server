@@ -17,7 +17,7 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 parameter_units = {
     'Depth of Cut': 'mm',
     'Velocity of Cutting': 'm/min',
-    'Feed Rate': 'mm'
+    'Feed Rate': 'mm/rev'
 }
 
 # Load the saved model
