@@ -80,9 +80,9 @@ def chip_morphology_handler():
         # Map predicted class index to class label and parameters
         class_labels = ['Continuous long chip', 'Continuous short chip', 'Discontinuous chip']
         parameters_1 = [
-            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.08mm'},
-            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.16mm'},
-            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.2mm'}
+            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.08mm/rev'},
+            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.16mm/rev'},
+            {'Depth of Cut': '2mm', 'Velocity of Cutting': '60.85m/min', 'Feed Rate': '0.2mm/rev'}
         ]
 
         parameters_2 = [
